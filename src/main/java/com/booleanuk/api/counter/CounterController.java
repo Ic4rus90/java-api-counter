@@ -12,7 +12,7 @@ import java.util.Objects;
 @RequestMapping("/counter")
 public class CounterController {
     private int counter = 0;
-    private HashMap<String, Integer> counters= new HashMap<>();
+    private final HashMap<String, Integer> counters= new HashMap<>();
 
     @GetMapping
     public int getCounter(){
