@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/counter")
@@ -29,22 +28,22 @@ public class CounterController {
         return --this.counter;
     }
 
-    @GetMapping("/custom/{name}")
-    public int getCustomCounter(@PathVariable String name){
-        if (counters.getOrDefault(name, -1).equals(-1))
+    @GetMapping("/custom/{counterName}")
+    public int getCustomCounter(@PathVariable String counterName){
+        if (counters.getOrDefault(counterName, -1).equals(-1))
         {
-            counters.put(name, 0);
+            counters.put(counterName, 0);
         }
-        return counters.get(name);
+        return counters.get(counterName);
     }
 
-    @GetMapping("/custom/{name}/increment")
-    public int incrementCustomCounter(@PathVariable String name){
-        return counters.merge(name, 1, Integer::sum);
+    @GetMapping("/custom/{counterName}/increment")
+    public int incrementCustomCounter(@PathVariable String counterName){
+        return counters.merge(counterName, 1, Integer::sum);
     }
 
-    @GetMapping("/custom/{name}/decrement")
-    public int decrementCustomCounter(@PathVariable String name){
-        return counters.merge(name, -1, Integer::sum);
+    @GetMapping("/custom/{counterName}/decrement")
+    public int decrementCustomCounter(@PathVariable String counterName){
+        return counters.merge(counterName, -1, Integer::sum);
     }
 }
